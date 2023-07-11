@@ -6,17 +6,22 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var av = "Only";
+
+    var ab = "A";
+
     return Scaffold(
+      
       appBar: AppBar(
         title: Text("Allah"),
       ),
 
-      drawer: Drawer(child: Center(child: Text("Allah")),),
+      drawer: Drawer(
+        child: Center(
+          child: Text("Container")),),
 
       body: Center(
         child: Container(
-          child: Text("Allah is the $av Greater"),
+          child: Text("Allah is the $ab Greater"),
         ),
       ),
     );
