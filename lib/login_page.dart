@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_day1/utilties/routs.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -21,7 +22,7 @@ class Loginpage extends StatelessWidget {
 
 
         Text(
-          "Wellcome",
+          "Login",
         style: TextStyle(
           fontSize: 35,
           color: Colors.teal,
@@ -63,7 +64,7 @@ SizedBox(
   height: 25,
 ),
               ElevatedButton(onPressed: (){
-
+                Navigator.pushNamed(context, MyRouts.homeRoute);
               }, 
 
             style: ElevatedButton.styleFrom(
