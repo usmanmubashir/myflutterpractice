@@ -3,7 +3,7 @@ import 'package:flutter_application_day1/utilties/routs.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+  const Loginpage({Key? key}) : super(key: key);
 
   @override
   State<Loginpage> createState() => _LoginpageState();
@@ -11,8 +11,19 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   String name = "";
+  final _goToHome = GlobalKey<FormState>();
+ 
+
+goToHome(BuildContext context) async{
+    if (_goToHome.currentState?.validate()==true) {
+      // await Future.delayed(Duration(seconds: 1));
+      Navigator.pushNamed(context, MyRouts.homeRoute);
+      }
+}
 
   @override
+
+
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
@@ -42,40 +53,57 @@ class _LoginpageState extends State<Loginpage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "User Name", hintText: "Enter User Name"),
-                    onChanged: (value) {
-                      setState(() {
-                        name = value;
-                      });
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: TextFormField(
-                      obscureText: true,
+              child: Form(
+                key: _goToHome,
+                child: Column(
+                  children: [
+                    TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Password", hintText: "Enter Password"),
+                          labelText: "User Name", hintText: "Enter User Name"),
+                      onChanged: (value) {
+                        setState(() {
+                          name = value;
+                        });
+                        },
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Your User Name";
+                          }
+                          return null;
+                        }
+                      
                     ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        await Future.delayed(Duration(seconds: 1));
-                        Navigator.pushNamed(context, MyRouts.homeRoute);
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.indigo,
-                          textStyle: TextStyle(
-                            fontFamily: GoogleFonts.ubuntu().fontFamily,
-                          )),
-                      child: Text("LOGIN"))
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            labelText: "Password", hintText: "Enter Password"),
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Your Password";
+                          } else if (value.length < 8) {
+                            return "Passswor have must atleast 8 Digits";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    ElevatedButton(
+                        onPressed: () => goToHome(context),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.indigo,
+                            textStyle: TextStyle(
+                              fontFamily: GoogleFonts.ubuntu().fontFamily,
+                            )),
+                        child: Text("LOGIN"))
+                  ],
+                ),
               ),
             )
           ],

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         // title: Text("Allah"),
-        title: Text("News App"),
+        title: Text("MY APP"),
       ),
 
       drawer: Drawer(
@@ -77,14 +77,20 @@ class _HomePageState extends State<HomePage> {
       //   ),
       // ),
 
+
+
+// indigo color container button
+
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
             child: InkWell(
-              onTap: () {
+              onTap: () async {
+                containerAnimation = true;
+                await Navigator.pushNamed(context, MyRouts.nextPageRoute);
                 setState(() {
-                  containerAnimation = true;
+                   containerAnimation = false;
                 });
               },
               child: Container(
@@ -99,6 +105,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
+// Amber color container button
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Row(
@@ -106,24 +115,36 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                     child: Padding(
                   padding: const EdgeInsets.fromLTRB(13, 0, 6.5, 0),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        containerAnimation1 = true;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      height: 150,
-                      // color: Colors.amber[100],
-                      decoration: BoxDecoration(
-                          color: containerAnimation1
-                              ? Colors.amber[200]
-                              : Colors.amber[100],
-                          borderRadius: BorderRadius.circular(10)),
+                  child: Material(
+                    color: Colors.amber[200],
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      child: InkResponse(
+                        containedInkWell: true,
+                        highlightColor: Colors.amber[100],
+                        splashColor: Colors.amber[100],
+                        borderRadius: BorderRadius.circular(10),
+                        highlightShape: BoxShape.rectangle,
+
+                        // splashColor: Colors.blue,
+                        onTap: () {
+                          setState(() {
+                            containerAnimation1 = true;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          child: Text(""),
+                          duration: Duration(seconds: 1),
+                          height: 150,
+                          // color: Colors.amber[100],
+                        ),
+                      ),
                     ),
                   ),
                 )),
+
+// green color container button
+
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(6.5, 0, 13, 0),
@@ -134,14 +155,16 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       child: AnimatedContainer(
-                        child: Center(child: 
-                        Text("INTERNATIONAL",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green
-                        ),
-                        )
-                        ),
+                        child: Center(
+                            child: Text(
+                          "",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF007D43),
+                            // color: Colors.black,
+                          ),
+                        )),
                         duration: Duration(seconds: 1),
                         height: 150,
                         decoration: BoxDecoration(
